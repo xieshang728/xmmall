@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+<!-- 扫描service层 -->
+	<context:component-scan base-package="com.xmall.service"></context:component-scan>
+	<!--扫描jdbc包-->
+	<context:property-placeholder location="classpath:db.properties"/>
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<!-- 连接池启动时的初始值 -->
+		<property name="initialSize" value="${jdbc.initialSize}"/>
+		<!-- 连接池的最大值 -->
+		<property name="maxActive" value="${jdbc.maxActive}"/>
+		<!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}"/>
+		<!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+		<property name="minIdle" value="${jdbc.minIdle}"/>
+		<!-- 最大建立连接等待时间。如果超过此时间将接到异常。设为－1表示无限制 -->
+		<property name="maxWait" value="${jdbc.maxWait}"/>
+		<!--#给出一条简单的sql语句进行验证 -->
+		<!--<property name="validationQuery" value="select getdate()" />-->
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}"/>
+		<!-- 回收被遗弃的（一般是忘了释放的）数据库连接到连接池中 -->
+		<!--<property name="removeAbandoned" value="true" />-->
+		<!-- 数据库连接过多长时间不用将被视为被遗弃而收回连接池中 -->
+		<!--<property name="removeAbandonedTimeout" value="120" />-->
+		<!-- #连接的超时时间，默认为半小时。 -->
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+
+		<!--# 失效检查线程运行时间间隔，要小于MySQL默认-->
+		<property name="timeBetweenEvictionRunsMillis" value="40000"/>
+		<!--# 检查连接是否有效-->
+		<property name="testWhileIdle" value="true"/>
+		<!--# 检查连接有效性的SQL语句-->
+		<property name="validationQuery" value="SELECT 1 FROM dual"/>
+	</bean>
+	<!-- 配置SqlSessionFactory -->
+
+
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations" value="classpath:com/xmall/mapper/*.xml"/>
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=mysql
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+
+	<!-- 扫描dao层 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.xmall.dao"></property>
+	</bean>
+	<!--配置事务管理器-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+
+	<!-- 声明式事务 以AspectJ方式 定义事物AOP -->
+	<aop:config>
+		<aop:pointcut id="txPoint" expression="execution(* com.xmall.service.impl.*ServiceImpl.*(..))"/>
+		<aop:advisor pointcut-ref="txPoint" advice-ref="txAdvice"/>
+	</aop:config>
+
+	<!-- 基本事务定义, 使用transactionManager作事务管理 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" />
+			<tx:method name="add*" rollback-for="java.lang.Exception"/>
+			<tx:method name="delete*"/>
+			<tx:method name="update*"/>
+		</tx:attributes>
+	</tx:advice>
+</beans>

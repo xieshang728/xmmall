@@ -1,0 +1,35 @@
+*.class
+
+#package file
+*.war
+*.ear
+
+#kdiff3 ignore
+*.orig
+
+#maven ignore
+target/
+out/
+
+#eclipse
+.setting/
+.project/
+.classpath
+
+#idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
+
+#temp file
+*.log
+*.cache
+*.diff
+*.pathc
+*.temp
+
+#system
+.DS_Store
+Thumbs.db

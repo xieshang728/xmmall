@@ -88,9 +88,9 @@
 	<!-- 基本事务定义, 使用transactionManager作事务管理 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="get*" />
-			<tx:method name="add*" rollback-for="java.lang.Exception"/>
-			<tx:method name="delete*"/>
+			<tx:method name="delete*" />
+			<tx:method name="select*" rollback-for="java.lang.Exception"/>
+			<tx:method name="insert*"/>
 			<tx:method name="update*"/>
 		</tx:attributes>
 	</tx:advice>

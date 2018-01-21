@@ -29,7 +29,7 @@
   </listener>
 
   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>com.xmall.listener.PlatformContextListener</listener-class>
   </listener>
   <context-param>
     <param-name>contextConfigLocation</param-name>

@@ -1,9 +1,10 @@
 package com.xmall.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Product {
+public class Product implements Serializable{
     private Integer id;
 
     private Integer categoryId;
@@ -141,5 +142,23 @@ public class Product {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", categoryId=" + categoryId +
+                ", name='" + name + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", mainImage='" + mainImage + '\'' +
+                ", subImages='" + subImages + '\'' +
+                ", detail='" + detail + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

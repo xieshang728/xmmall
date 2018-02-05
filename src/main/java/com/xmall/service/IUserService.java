@@ -14,15 +14,15 @@ public interface IUserService {
 
     RestResponse<String> register(User user);
 
-    RestResponse<String> checkValid(String str,String type);
+    RestResponse<String> checkValid(String str, String type);
 
     RestResponse<String> selectQuestion(String username);
 
-    RestResponse<String> selectCheckAnswer(String username,String question,String answer);
+    RestResponse<String> selectCheckAnswer(String username, String question, String answer);
 
-    RestResponse<String> forgetResetPassword(String username,String newPassword,String forgetToken);
+    RestResponse<String> forgetResetPassword(String username, String newPassword, String forgetToken);
 
-    RestResponse<String> resetPassword(String oldPassword,String newPassword,User user);
+    RestResponse<String> resetPassword(String oldPassword, String newPassword, User user);
 
     RestResponse<User> updateInformation(User user);
 

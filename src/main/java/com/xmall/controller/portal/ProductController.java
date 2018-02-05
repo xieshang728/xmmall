@@ -19,28 +19,28 @@ import java.util.List;
  * @date 2018/1/24
  */
 @Controller
-@RequestMapping(value="/product/")
+@RequestMapping(value = "/product/")
 public class ProductController {
 
     @Autowired
     private IProductService iProductService;
 
-    @RequestMapping(value="detail.do")
+    @RequestMapping(value = "detail.do")
     @ResponseBody
-    public RestResponse<ProductListVo> detail(Integer productId){
+    public RestResponse<ProductListVo> detail(Integer productId) {
         return iProductService.getProductDetail(productId);
     }
 
 
-    @RequestMapping(value="list.do")
+    @RequestMapping(value = "list.do")
     @ResponseBody
     public RestResponse<PageInfo> list(
-            @RequestParam(value="keyword",required = false) String keyword,
-            @RequestParam(value="categoryId",required = false) Integer categoryId,
-            @RequestParam(value="orderBy",defaultValue = Const.EMPTY) String orderBy,
-            @RequestParam(value="pageNum",defaultValue = Const.PAGE_NUM) Integer pageNum,
-            @RequestParam(value="pageSize",defaultValue = Const.PAGE_SIZE) Integer pageSize
-    ){
-        return iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "categoryId", required = false) Integer categoryId,
+            @RequestParam(value = "orderBy", defaultValue = Const.EMPTY) String orderBy,
+            @RequestParam(value = "pageNum", defaultValue = Const.PAGE_NUM) Integer pageNum,
+            @RequestParam(value = "pageSize", defaultValue = Const.PAGE_SIZE) Integer pageSize
+    ) {
+        return iProductService.getProductByKeywordCategory(keyword, categoryId, pageNum, pageSize, orderBy);
     }
 }

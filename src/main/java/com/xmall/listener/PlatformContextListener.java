@@ -32,12 +32,12 @@ public class PlatformContextListener extends ContextLoaderListener {
         ctx = WebApplicationContextUtils.getWebApplicationContext(context);
         long end = System.currentTimeMillis();
         long consume = end - start;
-        long min = (consume / 1000) /60;
-        long sec = (consume / 1000) %60;
-        if(min > 0){
-            logger.info("-------------------启动系统花费了"+min+"分钟"+sec+"秒-------------------");
-        }else{
-            logger.info("-------------------启动系统花费了"+sec+"秒-----------------------");
+        long min = (consume / 1000) / 60;
+        long sec = (consume / 1000) % 60;
+        if (min > 0) {
+            logger.info("-------------------启动系统花费了" + min + "分钟" + sec + "秒----------------");
+        } else {
+            logger.info("-------------------启动系统花费了" + sec + "秒-----------------------");
         }
     }
 
@@ -47,7 +47,7 @@ public class PlatformContextListener extends ContextLoaderListener {
         super.contextDestroyed(event);
     }
 
-    public static ApplicationContext getContext(){
+    public static ApplicationContext getContext() {
         return ctx;
     }
 }

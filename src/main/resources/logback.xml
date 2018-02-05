@@ -69,9 +69,13 @@
         <appender-ref ref="console"/>
     </logger>
      -->
+    <logger name="com.xmall.dao" level="debug" additivity="false">
+        <appender-ref ref="console" />
+    </logger>
 
-    <root level="INFO">
-        <appender-ref ref="console"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="debug"/>
         <appender-ref ref="error"/>
     </root>
 

@@ -7,5 +7,5 @@ import org.springframework.web.multipart.MultipartFile;
  * @date 2018/1/26
  */
 public interface IFileService {
-    String upload(MultipartFile multipartFile,String path);
+    String upload(MultipartFile multipartFile, String path);
 }

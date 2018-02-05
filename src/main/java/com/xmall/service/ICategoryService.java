@@ -10,9 +10,9 @@ import java.util.List;
  * @date 2018/1/23
  */
 public interface ICategoryService {
-    RestResponse<String> addCategory(String categoryName,Integer parentId);
+    RestResponse<String> addCategory(String categoryName, Integer parentId);
 
-    RestResponse<String> setCategoryName(String categoryName,Integer categoryId);
+    RestResponse<String> setCategoryName(String categoryName, Integer categoryId);
 
     RestResponse<List<Category>> getChildrenParallelCategory(Integer categoryId);
 

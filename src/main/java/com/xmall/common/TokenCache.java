@@ -18,7 +18,7 @@ public class TokenCache {
 
     public static final String TOKEN_PREFIX = "token_";
 
-    private static LoadingCache<String,String> loadingCache = CacheBuilder
+    private static LoadingCache<String, String> loadingCache = CacheBuilder
             .newBuilder()
             .initialCapacity(1000)
             .maximumSize(10000)
@@ -31,19 +31,19 @@ public class TokenCache {
             });
 
 
-    public static void setKey(String key , String value){
-        loadingCache.put(key,value);
+    public static void setKey(String key, String value) {
+        loadingCache.put(key, value);
     }
 
-    public static String getKey(String key){
-        try{
+    public static String getKey(String key) {
+        try {
             String value = loadingCache.get(key);
-            if(Const.NULL_STR.equals(value)){
+            if (Const.NULL_STR.equals(value)) {
                 return null;
             }
-            return value ;
-        }catch (Exception e){
-            logger.error("getKey exception: "+e.toString());
+            return value;
+        } catch (Exception e) {
+            logger.error("getKey exception: " + e.toString());
         }
         return null;
     }

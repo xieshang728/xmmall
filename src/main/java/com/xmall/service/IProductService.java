@@ -6,6 +6,8 @@ import com.xmall.entity.Product;
 import com.xmall.vo.ProductListVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 
 /**
  * @author xies
@@ -20,12 +22,17 @@ public interface IProductService {
     RestResponse<String> saveOrUpdateProduct(Product product);
 
     /**
-     *
      * @param productName
      * @param productId
      * @param pageNum
      * @param pageSize
      * @return
      */
-    RestResponse<PageInfo> searchProduct(String productName, Integer productId,Integer pageNum, Integer pageSize);
+    RestResponse<PageInfo> searchProduct(String productName, Integer productId, Integer pageNum, Integer pageSize);
+
+    RestResponse<String> setSaleStatus(Integer productId, Integer status);
+
+    RestResponse<ProductListVo> manageProductDetail(Integer productId);
+
+    RestResponse<PageInfo> getProductList(Integer pageNum, Integer pageSize);
 }

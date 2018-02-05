@@ -46,11 +46,11 @@ public class MD5Util {
             MessageDigest md = MessageDigest.getInstance("MD5");
             if (charsetname == null || "".equals(charsetname)) {
                 resultString = byteArrayToHexString(md.digest(resultString.getBytes()));
-            }else {
+            } else {
                 resultString = byteArrayToHexString(md.digest(resultString.getBytes(charsetname)));
             }
         } catch (Exception exception) {
-            logger.error("MD5Util exception: "+ exception.toString());
+            logger.error("MD5Util exception: " + exception.toString());
         }
         return resultString.toUpperCase();
     }
@@ -60,6 +60,9 @@ public class MD5Util {
         return MD5Encode(origin, "utf-8");
     }
 
+    public static void main(String[] args) {
+        System.out.println(MD5Util.MD5EncodeUtf8("geely"));
+    }
 
     private static final String hexDigits[] = {"0", "1", "2", "3", "4", "5",
             "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};

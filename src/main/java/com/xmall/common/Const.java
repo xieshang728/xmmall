@@ -16,17 +16,17 @@ public class Const {
 
     public static final String USERNAME = "username";
 
-    public static final String EMPTY ="";
+    public static final String EMPTY = "";
 
-    public static final String NULL_STR="null";
+    public static final String NULL_STR = "null";
 
-    public static final String DEFAULT_PARENT_ID="0";
+    public static final String DEFAULT_PARENT_ID = "0";
 
     public static final String PAGE_NUM = "1";
 
     public static final String PAGE_SIZE = "10";
 
-    public interface Role{
+    public interface Role {
         /**
          * 普通用户
          */
@@ -37,20 +37,36 @@ public class Const {
          */
     }
 
-    public interface ProductListOrderBy{
-        Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_asc","price_desc");
+    public interface ProductListOrderBy {
+        Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_asc", "price_desc");
 
     }
 
-    public enum ProductStatusEnum{
+    public interface Cart {
+        /**
+         * 购物车选中状态
+         */
+        int CHECKED = 1;
 
-        ON_SALE(1,"在线");
+        /**
+         * 购物车未选中状态
+         */
+        int UN_CHECKED = 0;
+
+        String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";
+
+        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
+    }
+
+    public enum ProductStatusEnum {
+
+        ON_SALE(1, "在线");
 
         private String value;
 
         private int code;
 
-        ProductStatusEnum(int code,String value){
+        ProductStatusEnum(int code, String value) {
             this.value = value;
             this.code = code;
         }

@@ -4,5 +4,14 @@
 <html>
 <body>
 <h2>Hello World!</h2>
+<br/>
+<form action="${pageContext.request.contextPath}/manage/product/upload.do" method="post" enctype="multipart/form-data">
+    <input type="file" name="upload_file"/>
+    <input type="submit" name="upload"/>
+</form>
+<form action="${pageContext.request.contextPath}/manage/product/richtext_img_upload.do" method="post" enctype="multipart/form-data">
+    <input type="file" name="upload_file"/>
+    <input type="submit" name="upload"/>
+</form>
 </body>
 </html>

@@ -337,6 +337,15 @@
           <include>**/*.xml</include>
         </includes>
       </resource>
+      <resource>
+        <directory>src/resources</directory>
+        <includes>
+          <include>**/*.prop</include>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
     </resources>
   </build>
 </project>

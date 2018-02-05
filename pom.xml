@@ -338,7 +338,7 @@
         </includes>
       </resource>
       <resource>
-        <directory>src/resources</directory>
+        <directory>src/main/resources</directory>
         <includes>
           <include>**/*.prop</include>
           <include>**/*.xml</include>

@@ -53,6 +53,7 @@
     <!-- geelynote mybatis log 日志 -->
 
     <logger name="com.mmall.dao" level="DEBUG"/>
+    <logger name="com.alipay.demo.trade" level="DEBUG"/>
     <!--
     <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >
         <appender-ref ref="console"/>
@@ -75,7 +76,7 @@
 
 
     <root level="DEBUG">
-        <appender-ref ref="debug"/>
+        <appender-ref ref="console"/>
         <appender-ref ref="error"/>
     </root>
 

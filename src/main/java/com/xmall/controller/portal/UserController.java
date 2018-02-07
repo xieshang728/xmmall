@@ -29,6 +29,7 @@ public class UserController {
     public RestResponse<User> login(String username, String password, HttpSession session) {
         RestResponse<User> response = iUserService.login(username, password);
         if (response.isSuccess()) {
+            System.out.println("hello world");
             session.setAttribute(Const.CURRENT_USER, response.getData());
         }
         return response;

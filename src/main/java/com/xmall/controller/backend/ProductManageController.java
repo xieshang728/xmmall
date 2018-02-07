@@ -75,7 +75,7 @@ public class ProductManageController {
 
     @RequestMapping(value = "set_sale_status.do")
     @ResponseBody
-    public RestResponse<String> setSalestatus(
+    public RestResponse<String> setSaleStatus(
             HttpSession session, Integer productId, Integer status
     ) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);

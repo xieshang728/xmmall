@@ -115,6 +115,15 @@ public class Const {
             this.desc = desc;
         }
 
+        public static PaymentTypeEnum codeOf(int code){
+            for(PaymentTypeEnum paymentTypeEnum : values()){
+                if(paymentTypeEnum.getCode() == code){
+                    return paymentTypeEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+
     }
 
     public enum PayPlatformEnum{
@@ -143,6 +152,7 @@ public class Const {
         public void setDesc(String desc) {
             this.desc = desc;
         }
+
     }
 
     public interface AlipayCallback{
@@ -153,11 +163,12 @@ public class Const {
         String RESPONSE_FAILED = "failed";
     }
 
+
     public enum OrderStatusEnum{
         CANCELED(0,"取消"),
         NO_PAY(10,"未支付"),
         PAID(20,"已付款"),
-        SHIPEED(40,"已发货"),
+        SHIPPED(40,"已发货"),
         ORDER_SUCCESS(50,"订单完成"),
         ORDER_CLOSE(60,"订单关闭");
 

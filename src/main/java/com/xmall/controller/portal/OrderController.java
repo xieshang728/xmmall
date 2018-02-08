@@ -13,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +35,58 @@ public class OrderController {
 
     @Autowired
     private IOrderService iOrderService;
+
+    @RequestMapping("create.do")
+    @ResponseBody
+    public RestResponse create(HttpSession session,Integer shippingId){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return RestResponse.error(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.createOrder(user.getId(),shippingId);
+    }
+
+
+    @RequestMapping("cancel.do")
+    @ResponseBody
+    public RestResponse cancel(HttpSession session,Long orderNo){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return RestResponse.error(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.cancelOrder(user.getId(),orderNo);
+    }
+
+    @RequestMapping("get_order_cart_product.do")
+    @ResponseBody
+    public RestResponse getOrderCartProduct(HttpSession session){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return RestResponse.error(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.getOrderCartProduct(user.getId());
+    }
+
+    @RequestMapping("detail.do")
+    @ResponseBody
+    public RestResponse detail(HttpSession session,Long orderNo){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return RestResponse.error(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.getOrderDetail(user.getId(),orderNo);
+    }
+
+    @RequestMapping("list.do")
+    @ResponseBody
+    public RestResponse list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = Const.PAGE_NUM) int pageNum, @RequestParam(value = "pageSize",defaultValue = Const.PAGE_SIZE) int pageSize){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user ==null){
+            return RestResponse.error(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.getOrderList(user.getId(),pageNum,pageSize);
+    }
+
 
 
     @RequestMapping(value = "pay.do")
@@ -88,7 +142,6 @@ public class OrderController {
     @RequestMapping(value="query_order_pay_status.do")
     @ResponseBody
     public RestResponse<Boolean> queryOrderPayStatus(HttpSession session,Long orderNo){
-        System.out.println("--------------------------------------------------");
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return RestResponse.error(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());

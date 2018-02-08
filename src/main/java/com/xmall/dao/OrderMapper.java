@@ -3,6 +3,8 @@ package com.xmall.dao;
 import com.xmall.entity.Order;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -19,4 +21,8 @@ public interface OrderMapper {
     Order selectOrderByUserIdOrderNo(@Param("userId") Integer userId, @Param("orderNo") Long orderNo);
 
     Order selectByOrderNo(Long orderNo);
+
+    List<Order> getOrdersByUserId(Integer userId);
+
+    List<Order> getAllOrder();
 }

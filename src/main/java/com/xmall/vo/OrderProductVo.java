@@ -1,5 +1,7 @@
 package com.xmall.vo;
 
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -7,6 +9,11 @@ import java.util.List;
  * @author  xies
  * @date 2018/2/8.
  */
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderProductVo {
 
     private List<OrderItemVo> orderItemVoList;
@@ -15,27 +22,4 @@ public class OrderProductVo {
 
     private String imageHost;
 
-    public List<OrderItemVo> getOrderItemVoList() {
-        return orderItemVoList;
-    }
-
-    public void setOrderItemVoList(List<OrderItemVo> orderItemVoList) {
-        this.orderItemVoList = orderItemVoList;
-    }
-
-    public BigDecimal getProductTotalPrice() {
-        return productTotalPrice;
-    }
-
-    public void setProductTotalPrice(BigDecimal productTotalPrice) {
-        this.productTotalPrice = productTotalPrice;
-    }
-
-    public String getImageHost() {
-        return imageHost;
-    }
-
-    public void setImageHost(String imageHost) {
-        this.imageHost = imageHost;
-    }
 }

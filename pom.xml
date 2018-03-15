@@ -12,7 +12,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
-    <org.springframework.version>4.3.10.RELEASE</org.springframework.version>
+    <org.springframework.version>4.0.3.RELEASE</org.springframework.version>
     <org.mybatis.version>3.4.1</org.mybatis.version>
     <org.mybatis.spring.version>1.3.0</org.mybatis.spring.version>
   </properties>
@@ -24,6 +24,15 @@
       <version>3.1.0</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.18</version>
+      <scope>provided</scope>
+    </dependency>
+
 
     <dependency>
       <groupId>org.springframework</groupId>
@@ -274,6 +283,12 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.8.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+      <version>2.4.2</version>
+    </dependency>
 
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -285,7 +300,7 @@
     <dependency>
       <groupId>redis.clients</groupId>
       <artifactId>jedis</artifactId>
-      <version>2.9.0</version>
+      <version>2.6.0</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
     <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
@@ -294,6 +309,15 @@
       <artifactId>spring-data-redis</artifactId>
       <version>1.8.6.RELEASE</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-pool/commons-pool -->
+    <dependency>
+      <groupId>commons-pool</groupId>
+      <artifactId>commons-pool</artifactId>
+      <version>1.6</version>
+    </dependency>
+
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
@@ -332,6 +356,12 @@
 
     <resources>
       <resource>
+        <directory>src/main/resources.${deploy.type}</directory>
+        <excludes>
+          <exclude>*.jsp</exclude>
+        </excludes>
+      </resource>
+      <resource>
         <directory>src/main/java</directory>
         <includes>
           <include>**/*.xml</include>
@@ -339,13 +369,33 @@
       </resource>
       <resource>
         <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.prop</include>
-          <include>**/*.xml</include>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
       </resource>
     </resources>
   </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <deploy.type>dev</deploy.type>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>beta</id>
+      <properties>
+        <deploy.type>beta</deploy.type>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>prod</id>
+      <properties>
+        <deploy.type>prod</deploy.type>
+      </properties>
+    </profile>
+  </profiles>
 </project>

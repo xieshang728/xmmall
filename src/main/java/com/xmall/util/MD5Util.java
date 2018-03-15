@@ -1,8 +1,6 @@
 package com.xmall.util;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.security.MessageDigest;
 
@@ -10,9 +8,8 @@ import java.security.MessageDigest;
  * @author xies
  * @date 2018/1/22
  */
+@Slf4j
 public class MD5Util {
-
-    private static Logger logger = LoggerFactory.getLogger(MD5Util.class);
 
     private static String byteArrayToHexString(byte b[]) {
         StringBuffer resultSb = new StringBuffer();
@@ -50,7 +47,7 @@ public class MD5Util {
                 resultString = byteArrayToHexString(md.digest(resultString.getBytes(charsetname)));
             }
         } catch (Exception exception) {
-            logger.error("MD5Util exception: " + exception.toString());
+            log.error("MD5Util exception: " + exception.toString());
         }
         return resultString.toUpperCase();
     }

@@ -18,8 +18,8 @@ public class RedisPool {
     private static Boolean testOnBorrow = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.test.borrow","true"));
     private static Boolean testOnReturn = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.return.borrow","true"));
 
-    private static String redisIp = PropertiesUtil.getProperty("redis.ip");
-    private static Integer redisPort = Integer.parseInt(PropertiesUtil.getProperty("redis.port"));
+    private static String redisIp = PropertiesUtil.getProperty("redis1.ip");
+    private static Integer redisPort = Integer.parseInt(PropertiesUtil.getProperty("redis1.port"));
 
     private static void initPool(){
         JedisPoolConfig config = new JedisPoolConfig();

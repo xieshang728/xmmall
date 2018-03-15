@@ -58,7 +58,7 @@ public class MD5Util {
     }
 
     public static void main(String[] args) {
-        System.out.println(MD5Util.MD5EncodeUtf8("geely"));
+        System.out.println(MD5Util.MD5EncodeUtf8("admin"));
     }
 
     private static final String hexDigits[] = {"0", "1", "2", "3", "4", "5",

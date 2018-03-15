@@ -1,10 +1,7 @@
 package com.xmall.common;
 
 import com.xmall.util.PropertiesUtil;
-import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.JedisShardInfo;
-import redis.clients.jedis.ShardedJedis;
-import redis.clients.jedis.ShardedJedisPool;
+import redis.clients.jedis.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +23,8 @@ public class RedisShardedPool {
     private static Integer redis1Port = Integer.valueOf(PropertiesUtil.getProperty("redis1.port"));
     private static String redis2Ip = PropertiesUtil.getProperty("redis2.ip");
     private static Integer redis2Port = Integer.valueOf(PropertiesUtil.getProperty("redis2.port"));
+//    private static String redis3Ip = PropertiesUtil.getProperty("redis3.ip");
+//    private static Integer redis3Port = Integer.valueOf(PropertiesUtil.getProperty("redis3.port"));
 
     private static void initPool(){
         JedisPoolConfig config = new JedisPoolConfig();
@@ -41,6 +40,7 @@ public class RedisShardedPool {
 
         JedisShardInfo info1 = new JedisShardInfo(redis1Ip,redis1Port,1000*2);
         JedisShardInfo info2 = new JedisShardInfo(redis2Ip,redis2Port,1000*2);
+        //JedisShardInfo info3 = new JedisShardInfo(redis3Ip,redis3Port,1000*2);
 
         List<JedisShardInfo> jedisShardInfos = new ArrayList<>();
         jedisShardInfos.add(info1);
@@ -67,4 +67,12 @@ public class RedisShardedPool {
         pool.returnResource(jedis);
     }
 
+    public static void main(String[] args){
+        ShardedJedis jedis = pool.getResource();
+
+        for(int i = 0 ; i < 10 ; i++){
+            jedis.set("key_"+i,"val_"+i);
+        }
+        returnResource(jedis);
+    }
 }

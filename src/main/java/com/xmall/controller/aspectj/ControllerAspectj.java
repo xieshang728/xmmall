@@ -24,7 +24,7 @@ public class ControllerAspectj {
 
     @Around("aspectJMethod()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable{
-        System.out.println("hello world");
+        System.out.println("-------------------------hello world----------------------------");
         pjp.proceed();
         return null;
     }
